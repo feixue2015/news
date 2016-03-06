@@ -1,0 +1,334 @@
+﻿<!doctype html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+  <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <style type="text/css">
+   .mod{
+    width:600px;
+    height: auto;
+    border: 1px solid #38f;
+    position:absolute;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 0 3px #38f;
+    padding: 25px 20px;
+   }
+     body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    
+    .error{
+    color: Red;
+    font-size: 16px;
+    }
+  </style>
+  <script type="text/javascript">
+    // $(document).ready(function(){
+    //   var list=$(".nav-tabs").find("li");
+    //   $.each(list,function(i,arr){
+    //      $(arr).click(function(){
+    //       $(this).addclass("active").sibilings().removeclass("active");
+         
+    //   });
+    //   });
+     
+    //  });
+    window.onload = function() {
+      //$.getJSON("login.php",function(result){
+       //console.log(result);
+      
+     // });
+
+      $.getJSON("qnews.php", function(result) {
+       // console.log(result);
+        // console.log($("input[name='radio'][value=result[0].topnews]"));
+        
+         $.each(result, function(i, field) {
+          $(".well").find("table").append("<tr><td>" + field.title + "</td><td>" + field.description + "</td><td>" + field.datetime + "</td><td>" + field.type + "</td><td>" + field.Source + "</td><td>\
+                  <i class='icon-pencil' onclick='modifynews(" + field.id + ")'></i></a>\
+                  <i class='icon-remove' onclick='deletenews(" + field.id + ")'></i>\
+                </td>\
+            </tr>");
+        });
+      });
+    }
+
+   function deletenews(id) {
+     if (confirm("是否确定删除该条新闻")) {
+       $.post("deletenews.php?id=" + id,
+         function() {});
+     }
+   }
+
+   function modifynews(id) {
+
+     var modbox = document.createElement("div");
+     modbox.className = "mod";
+     document.body.appendChild(modbox);
+     var screenWidth = document.documentElement.clientWidth;
+     var screenHeight = document.documentElement.clientHeight;
+    
+     //console.log(screenWidth);
+     var width = modbox.offsetWidth;
+     var height = modbox.offsetHeight;
+     modbox.style.top = (screenHeight / 2 - height/ 2)+ "px";
+     modbox.style.left = (screenWidth / 2 - width / 2) + "px";
+     var box = document.getElementsByClassName("box");
+     //console.log(box);
+     box[0].style.display = "block";
+     modbox.appendChild(box[0]);
+
+     var btn = document.getElementById("submit");
+     btn.onclick = function() {
+       save(id);
+     }
+
+     $.getJSON("qnews.php?id=" + id,
+       function(result) {
+         console.log(result);
+        
+         
+         $("#title").attr("value", result[0].title);
+         $("#laiyuan").attr("value", result[0].Source);
+         $("#description").attr("value", result[0].description);
+         $("#type").val(result[0].type);
+         $("#news").val(result[0].Content);
+         $("#images").attr("value", result[0].image);
+         $("#images2").attr("value", result[0].image1);
+         $("#images3").attr("value", result[0].image2);
+          $("input[name='topnews'][value='"+result[0].topnews+"']").attr("checked",true);
+       });
+   }
+
+   function save(id) {
+     alert(id);
+     var obj = {
+       "id": id,
+       "title": $("#title").val(),
+       "laiyuan": $("#laiyuan").val(),
+       //"news": $("#news").val(),
+       "description": $("#description").val(),
+       "type": $("#type option:selected").val(),
+       "images": $("#images").val(),
+       "images2": $("#images2").val(),
+       "images3": $("#images3").val(),
+       "topnews": $("input[name='topnews']:checked").val()
+
+     };
+     var str = JSON.stringify(obj);
+     $.ajax({
+       type: "post",
+       //cache:false,
+       url: "savenews.php",
+       contentType: "application/json",
+       dataType: "json",
+       data: str, //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",
+       success: function(jsonResult) {
+         alert(jsonResult);
+       }
+     });
+   }
+  
+  </script>
+</head>
+<body>
+  <div class="navbar  navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="">网站管理系统</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav nav-tabs">
+            <li ><a href="">用户管理</a></li>
+            <li class="active"><a href="newslist.html">新闻管理</a></li>
+          </ul>
+          <div class="pull-right">
+            <ul class="nav pull-right">
+                  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎您,$user<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="/user/preferences"><i class="icon-cog"></i> 个人设置</a></li>
+                          <li><a href="/help/support"><i class="icon-envelope"></i> 意见反馈</a></li>
+                          <li class="divider"></li>
+                          <li><a href="logout.php"><i class="icon-off"></i> 退出</a></li>
+                      </ul>
+                  </li>
+            </ul>
+          </div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+            <li class="nav-header">新闻管理</li>
+            <li><a href="addnews.html">新建新闻</a></li>
+            <li class="active"><a href="newslist.html">新闻列表</a></li>
+          </ul>
+        </div><!--/.well -->
+      </div><!--/span-->
+      <div class="span10">
+    <div class="well">
+      <div class="btn-toolbar">
+          <a class="btn btn-primary" href="addnews.html" >新 建</a>
+          <!--button class="btn">导 入</button>
+          <button class="btn">导出</button-->
+      </div>		
+      <div class="well">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>标题</th>
+                <th>简介</th>
+      		  <th>时间</th>
+                <th>新闻类型</th>
+      		  <th>来源</th>
+                <th style="width: 36px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+      		      <td></td>
+                <!--td>
+                    <a href="modifynews.php?id=$row[0]"><i class="icon-pencil"></i></a>
+                	  <a href="deletenews.php?id=$row[0]"><i class="icon-remove"></i></a>
+                    <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                </td-->
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="pagination">
+          <ul>
+              <li><a href="#">Prev</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">Next</a></li>
+          </ul>
+      </div>
+      <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">确认</h3>
+          </div>
+          <div class="modal-body">
+              <p class="error-text">您确认删除这个新闻吗?</p>
+          </div>
+          <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+              <button class="btn btn-danger" data-dismiss="modal">删除</button>
+          </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 弹出框-->
+  <div class="box" style="display:none">
+       <form method="" action="">
+          <div class="control-group">
+              <!-- Username -->
+            <label class="control-label"  for="title">新闻标题</label>
+            <div class="controls">
+              <input type="text" id="title" name="title" value="" placeholder="" class="input-xlarge"  required>
+              <p class="help-block">请输入新闻标题</p>
+            </div>
+          </div>
+          <div class="control-group">
+              <!-- Password-->
+            <label class="control-label" for="news">稿源</label>
+            <div class="controls">
+              <input type="text" id="laiyuan" name="laiyuan" value="" placeholder="" class="input-xlarge" required>
+              <p class="help-block">请输入稿源</p>
+            </div>
+          </div>
+   
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="description">简介</label>
+            <div class="controls">
+              <input id="description" name="description" value="" placeholder="" class="input-xlarge" type="description">
+              <p class="help-block">请输入简介</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="type" >新闻类型</label>
+            <div class="controls">
+              <select id="type" name="type" class="input-xlarge">
+                <option value="0">推荐</option>
+                <option value="1">百家</option>
+                <option value="2">本地</option>
+              </select>
+            </div>
+          </div>
+      
+          <div class="control-group">
+              <!-- remark -->
+            <label class="control-label"  for="news">内容</label>
+            <div class="controls">
+              <textarea rows="4" class="" id="news" name="news" value="" placeholder="" > </textarea>
+              <p class="help-block">请输入内容信息</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="images">图片</label>
+            <div class="controls">
+              <input id="images" name="images" value="" placeholder="" class="input-xlarge" type="images">
+              <p class="help-block">请输入图片</p>
+            </div>
+            <label class="control-label" for="images">图片2</label>
+            <div class="controls">
+              <input id="images2" name="images2" value="" placeholder="" class="input-xlarge" type="images">
+              <p class="help-block">请输入图片</p>
+            </div>
+            <label class="control-label" for="images">图片3</label>
+            <div class="controls">
+              <input id="images3" name="images3" value="" placeholder="" class="input-xlarge" type="images">
+              <p class="help-block">请输入图片</p>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="topnews" >头条</label>
+            <div class="controls" id="radios">
+              <input type="radio" name="topnews" value="1">是           
+              <input type="radio" name="topnews"  value="0">不是      
+            </div>
+          </div>
+          <div class="control-group">
+          <!-- Button -->
+            <div class="controls">
+              <button type="submit" class="btn btn-primary" id="submit">保  存</button> &nbsp;&nbsp;
+              <a class="btn" href="newslist.html">返 回</a>
+              <span class="error"></span> 
+            </div>
+          </div>
+      </form>
+  </div>
+</body>
+</html>

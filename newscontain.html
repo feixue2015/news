@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/newscontain.css">
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#prev").click(function(){
+				//alert("ok");
+             window.history.go(1);
+		});
+       var src = window.location.href;
+
+		var I = src.substr(src.indexOf("?id=") + 4);
+		var par = "id="+I;
+		$.getJSON("qnews.php",par,function(result){
+			console.log(result);
+			console.log(result[0].title);
+			$(".title").find("h3").text(result[0].title);
+			$(".from-list1").find(".list1-text-1").text(result[0].Source);
+			$(".from-list1").find(".list1-text-2").text(result[0].datetime);
+			$(".title2").find("h4").text(result[0].description);
+			$(".text-contain").find("p").html(result[0].Content);
+		});
+	});
+	</script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="head">
+		<div class="nav">
+			<div class="prev" id="prev"><span class="prev-icon"></span></div>
+			<div class="title"><span>推荐</span></div>
+			<div class="icon"><span class="image-icon"></span></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="main1">
+			<div class="main1-box">
+				<div class="hot">
+					<span class="hot-icon">热点</span>
+				</div>
+				<ul class="ul" id="ul-list" style="transition:none; margin-top:0px;">
+					<li class="list">
+						<span>特斯拉第三季度亏损</span>
+						<b></b>
+					</li>
+					<li class="list">
+						<span>百城房价环比上涨</span>
+						<b></b>
+					</li>
+					<li class="list">
+						<span>驾驶证代扣分处罚</span>
+						<b></b>
+					</li>
+					<li class="list">
+						<span>特斯拉第三季度亏损</span>
+						<b></b>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="main2">
+			<div class="title">
+				<h3>发改委:双11价应同实体店一样</h3>
+			</div>
+			<div class="from">
+				<div class="from-list1">
+					<span class="list1-text-1">中国广播网</span>
+					<span class="list1-text-2">2015年11月5日12:32</span>
+				</div>
+				<div class="from-list2">
+					<div class="list2-box">
+						<b class="list2-icon-1"></b>
+						<span class="list2-text">1</span>
+					</div>
+					<div class="list2-box">
+						<b class="list2-icon-2"></b>
+					</div>
+				</div>
+			</div>
+			<div class="text">
+				<div class="title2">
+					<h4>(原标题：发改委：双11网购价应同实体店一样 不得欺骗诱导消费者)</h4>
+				</div>
+				<div class="text-contain">	
+					<p>央广网北京11月5日消息 据<a href="">中国</a>之声《央广新闻》报道，国家发改委今天召开新闻发布会，介绍价格<a href="">改革</a>和价格监督反垄断等工作的成绩和未来安排。</p>		
+				
+				</div>
+			</div>
+			<div class="read-all">
+				<a href="">点击查看全文<i class="i-icon"></i></a>
+			</div>
+			<div class="like-no">
+				<div class="like-box first">
+					<div class="like-list">
+						<span class="list-icon1">
+							<em class="number-icon1">0</em>
+							<i class="number-text1"></i>
+						</span>	
+					</div>
+				</div>
+				<div class="like-box second">
+					<div class="like-list">
+						<span class="list-icon2">
+							<em class="number-icon2">0</em>
+							<i class="number-text2"></i>
+						</span>		
+					</div>
+				</div>
+				<div class="like-box three">
+					<div class="like-list">
+						<span class="list-icon3">
+							<em class="number-icon3">0</em>
+							<i class="number-text3"></i>
+						</span>	
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div class="share">
+			<dl class="share-list">
+				<dt class="list-font">分享到</dt>
+				<dd class="list-image">
+					<a class="weibo" href=""><span>新浪微博</span></a>
+					<a class="renren" href=""><span>人人网</span></a>
+					<a class="QQ" href=""><span>QQ空间</span></a>
+					<a class="qweibo" href=""><span>腾讯微博</span></a>
+					<a class="douban" href=""><span>豆瓣网</span></a>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="main3">
+		<div class="new-title">
+			<span class="icon1"></span>
+			<span class="text">相关新闻</span>
+		</div>
+		<div class="new-list">
+			<div class="image"><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3580210867,3098509580&fm=116&gp=0.jpg"></div>
+			<div class="new-text">
+				<div class="list-h3">
+					刘烨首次回忆三段感情暗示谢娜走红后提分手
+				</div>
+				<div class="list-p">
+					上一期节目中，刘烨屡遭挫折，更是因错过火车而情绪崩溃。相比之下，瑞士的旅途则运气颇佳，一路上畅通无阻，就算是在雪山突遇暴雪也最终逢凶化吉，连他自己也笑称是“上帝的宠儿”。
+				</div>
+			</div>
+			<div class="new-foot">
+				<div class="foot-left">
+					<span>1小时</span>
+				</div>
+				<div class="foot-right">
+					<span class="new-from">新闻来源</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="foot">
+		<div class="foot-nav">
+			<div class="nav-wrapper">
+				<div class="conmon view">
+					<span class="view-text">意见反馈</span>
+				</div>
+			</div>
+			<div class="nav-wrapper">
+				<div class="conmon apply">
+					<span class="apply-text">应用推荐</span>
+				</div>
+			</div>
+			<div class="nav-wrapper">
+				<div class="conmon user">
+					<span class="user-text">客户端</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/newslist.js"></script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+    <script type="text/javascript" src="handlesbar/jquery.js"></script>
+    <script type="text/javascript" src="handlesbar/handlebars-1.0.0.beta.6.js"></script>
+
+
+
+    <script id="mymain3" type="text/x-handlebars-template" >
+ 	<div class='main3'>
+		<div class='main3-box' data-displayurl='newscontain.html?id='{{id}}>
+			<div class='new1 showline'>
+				<div class='new-image'>
+					<img class='img' src= {{image}} />
+				</div>
+				<div class='new-text'>
+					<h2 class='text-title'>
+						{{title}}
+					</h2>
+					<p class='text-contain'>
+						{{description}}
+					</p>
+				</div>
+				<div class='new-bottom'>
+					<div class='bottom-text'>
+						<b class='time'>发表于{{datetime}}前</b>
+						<b class='www'>网址</b>
+						<b class='hot'>{{laiyuan}}</b>
+					</div>
+				</div>
+			</div>
+		</div>
+  	</div>
+</script>
+<script type="text/x-handlebars-template" id="mymain4">
+	<div class="main4">
+		<div class="main4-box" data-displayurl='newscontain.html?id='{{id}}>
+			<div class="main4-text">
+			{{title}}
+		    </div>
+			<div class="image-list">
+				<div class="image-box one">
+					<img src={{image}} />
+				</div>
+			</div>
+			<div class="image-list">
+				<div class="image-box two">
+					<img src={{image1}} />
+				</div>
+			</div>
+			<div class="image-list">
+				<div class="image-box three">
+					<img src={{image2}} />
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/javascript" src="js/indexbk.js"></script>
+	
+</head>
+<body>
+
+	<div class="head">
+		<div class="nav1">
+			<div class="abox">
+				<a href="">
+					<span class="foot-icon"></span>
+				</a>
+			</div>
+			<div class="load">
+				<span class="load-icon"></span>
+			</div>
+			<div class="nav-logo">
+				<a class="alogo" href="">
+					<span class="logo-icon"></span>
+				</a>
+			</div>
+			<div class="search">
+				<span class="search-icon"></span>
+				<span class="more-icon"></span>
+			</div>
+		</div>
+		<div class="nav2" id="navbar">
+			<div class="news">
+				<table>
+					<tbody>
+						<tr >
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>推荐</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>百家</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>本地</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>图片</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>娱乐</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<span>社会</span>
+								</div>
+							</td>
+						</tr>
+						<tr class="cols" id="show-btn">
+							<td colspan="1">
+								<div class="cols1-list1">
+									<i></i>
+									<span>军事</span>
+								</div>
+							</td>
+							<td colspan="1">
+								<div class="cols1-list1">
+									<i></i>
+									<span>科技</span>
+								</div>
+							</td>
+							<td colspan="2">
+								<div class="cols1-list1">
+									<i></i>
+									<span>互联网</span>
+								</div>
+							</td>
+							<td colspan="1">
+								<div class="cols1-list1">
+									<i></i>
+									<span>女人</span>
+								</div>
+							</td>
+							<td colspan="1">
+								<div class="cols1-list1">
+									<span>搞笑</span>
+									<div class="up-icon" id="up-icon" >
+									更多
+									<div class="icon"></div>
+								</div>
+								</div>
+								
+							</td>
+						</tr>
+						<tr class="cols1">
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>生活</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>国际</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>国内</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>体育</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>汽车</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<span>财经</span>
+								</div>
+							</td>
+						</tr>
+						<tr class="cols1">
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>房产</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>时尚</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>教育</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>游戏</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<i></i>
+									<span>旅游</span>
+								</div>
+							</td>
+							<td>
+								<div class="cols1-list1">
+									<span>人文</span>
+								</div>
+							</td>
+						</tr>
+						<tr class="cols1">
+							<td colspan="2">
+								<div class="cols1-list1">
+									<i></i>
+									<span>创意</span>
+								</div>
+							</td>
+							<td colspan="2">
+								<div class="cols1-list1">
+									<span>互联网+</span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+		<div class="foot">
+			<div class="foot-1">
+				<i></i>
+				<span>记者榜</span>
+			</div>
+			<div class="foot-1">
+				<i></i>
+				<span>媒体榜</span>
+			</div>
+			<div class="foot-1">
+				<span>删除及排序</span>
+			</div>
+			<div class="foot-2" id="hidd-btn">
+				收起
+				<div class="foot-2icon"></div>
+			</div>
+		</div>
+	</div>
+			  <!--  <div>轮播图</div> -->
+	<div id="myCarousel" class="carousel slide">
+	   <!-- 轮播（Carousel）指标 -->
+	   <ol class="carousel-indicators">
+		  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		  <li data-target="#myCarousel" data-slide-to="1"></li>
+		  <li data-target="#myCarousel" data-slide-to="2"></li>
+	   </ol>   
+	   <!-- 轮播（Carousel）项目 -->
+	   <div class="carousel-inner">
+	   </div>
+	   <!-- 轮播（Carousel）导航 -->
+	   <a class="carousel-control left" href="#myCarousel" 
+		  data-slide="prev">&lsaquo;</a>
+	   <a class="carousel-control right" href="#myCarousel" 
+		  data-slide="next">&rsaquo;</a>
+	</div> 
+
+	<div class="scroll">
+		<div class="scroll-box">
+			<span class="hot-icon">热点</span>
+			<div class="news-list">
+				<ul class="ul-list">
+					<li>不再发独生子女奖励</li>
+					<li>停开单身证明</li>
+					<li>二孩明年一季度落地</li>
+					<li>陈雨露任央行副行长</li>
+				</ul>
+			</div>
+		</div>	
+	</div> 
+	<div class="contain">
+		<div class="containbox" id="containbox">		
+		</div>
+	</div>
+
+ 	
+<script type="text/javascript"> 
+      var time;
+      function autoScroll(obj) {
+      	$(obj).find(".ul-list").animate({
+      		marginTop: "-39px"
+      	}, 1000, function() {
+      		$(this).css({
+      			marginTop: "0px"
+      		}).find("li:first").appendTo(this);
+      	})
+      }
+      $(function() {
+      	time = setInterval('autoScroll(".news-list")', 2000);
+
+      })
+
+      $(".news-list").mouseover(function() {
+      	clearInterval(time);
+      });
+      $(".news-list").mouseout(function() {
+      	time = setInterval('autoScroll(".news-list")', 2000);
+      });
+
+      	var moreTypeBtn=document.getElementById('up-icon');  //获取展开频道的按钮
+		var types=document.getElementsByClassName('cols1');
+		var closeType=document.getElementsByClassName('foot');
+		moreTypeBtn.onclick=function(){
+			closeType[0].style.display='block';
+			for(var i=0;i<types.length;i++){
+				types[i].style.display='table-row';
+			}
+		}
+
+		//点击更多展开隐藏的type频道
+
+		var  closeTypeBtn=document.getElementById('hidd-btn');
+		closeTypeBtn.onclick=function(){
+			closeType[0].style.display='none';
+			for(var i=0;i<types.length;i++){
+				types[i].style.display='none';
+			}
+
+		}
+		
+</script>
+</body>
+</html>
